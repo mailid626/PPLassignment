@@ -38,21 +38,22 @@
 <assign> ===> ID <array_op> EQUALS <expression> SEMICOLON
 <assign> ===> IDB <array_op> EQUALS <expression_bool> SEMICOLON
 <expression> ===> <expression_arith>
-<expression_arith> ===> <expression_arith> PLUS <term>
-<expression_arith> ===> <expression_arith> MINUS <term>
+<expression_arith> ===> <term> PLUS <expression_arith> 
+<expression_arith> ===> <term> MINUS <expression_arith>
 <expression_arith> ===> <term>
-<term> ===> <term> MUL <factor>
-<term> ===> <term> DIV <factor>
+<term> ===> <factor> MUL <term> 
+<term> ===> <factor> DIV <term>
 <term> ===> <factor>
 <factor> ===> ID <array_op>
 <factor> ===> NUM
 <array_op> ===> SQOP <ind_list> SQCL
 <array_op> ===> EPSILON
-<ind_list> ===> ID
+<ind_list> ===> ID <more_ind_list>
 <ind_list> ===> NUM
-<ind_list> ===> <ind_list>ID
-<expression_bool> ===> <expression_bool> OR <term_bool>
+<more_ind_list> ===> <ind_list>
+<more_ind_list> ===> EPSILON
+<expression_bool> ===> <term_bool> OR <expression_bool>
 <expression_bool> ===> <term_bool>
-<term_bool> ===> <term_bool> AND <factor_bool>
+<term_bool> ===> <factor_bool> AND <term_bool> 
 <term_bool> ===> <factor_bool>
 <factor_bool> ===> IDB

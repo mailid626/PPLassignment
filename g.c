@@ -14,7 +14,7 @@ char* TerminalMap[] = {
 };
 
 char* NonTerminalMap[] = {
-    "program", "stmts", "stmt", "more_stmts", "decl", "assign", "var_list", "type", "primitive", "array", "rectangular", "jagged", "arr_dims", "arr_dim", "range", "low", "high", "rows_dec_R1", "rows_dec_jR1", "op_dim", "rowjj", "rowj", "expression", "expression_arith", "expression_bool", "term", "term_bool", "factor", "factor_bool", "ind_list", "remaining_var", "more_rowj", "more_rowjj", "array_op"
+    "program", "stmts", "stmt", "more_stmts", "decl", "assign", "var_list", "type", "primitive", "array", "rectangular", "jagged", "arr_dims", "arr_dim", "range", "low", "high", "rows_dec_R1", "rows_dec_jR1", "op_dim", "rowjj", "rowj", "expression", "expression_arith", "expression_bool", "term", "term_bool", "factor", "factor_bool", "ind_list", "more_ind_list", "remaining_var", "more_rowj", "more_rowjj", "array_op"
 };
 
 
@@ -62,7 +62,7 @@ Grammar* load_grammar_from_text_file(char* grammar_text_file){
 		}
 		
 		//Load a new rule
-        printf("\n Loading new rule %d", i);
+        printf("\n Loading rule %d", i);
         i++;
 		char* non_term_str = (char*)malloc(sizeof(char)*MAX_SYMBOL_SIZE);
 		int i = 0;
@@ -78,7 +78,6 @@ Grammar* load_grammar_from_text_file(char* grammar_text_file){
 		Rule* new_rule = initialize_rule(&next_rule_no);
 		Symbol_list* list = initialize_symbols_list();
 		Symbol_node* curr_node = list->head;
-        printf("\n Line 1");
 
 		while(1){
 			if(end_of_file==1)
@@ -314,7 +313,6 @@ FirstAndFollow* ComputeFirstAndFollowSets(Grammar* grm){
 
 	//Computer First Sets
 	for(int i=0;i<TOTAL_NON_TERMINALS;i++){
-		if(i<22 && i>22)
 
 		compute_First(grm,(NonTerminal)i, sets->first);
 		printf("\n%d\n", i);		
