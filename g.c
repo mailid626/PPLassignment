@@ -14,7 +14,7 @@ char* TerminalMap[] = {
 };
 
 char* NonTerminalMap[] = {
-    "program", "stmts", "stmt", "more_stmts", "decl", "assign", "var_list", "type", "primitive", "array", "rectangular", "jagged", "arr_dims", "arr_dim", "range", "low", "high", "rows_dec_R1", "rows_dec_jR1", "op_dim", "rowjj", "rowj", "expression", "expression_arith", "expression_bool", "term", "term_bool", "factor", "factor_bool", "ind_list", "more_ind_list", "remaining_var", "more_rowj", "more_rowjj", "array_op"
+    "program", "stmts", "stmt", "more_stmts", "decl", "assign", "var_list", "type", "primitive", "array", "rectangular", "jagged", "arr_dims", "arr_dim", "range", "low", "high", "rows_dec_R1", "rows_dec_jR1", "op_dim", "rowjj", "rowj", "expression", "expression_arith", "expression_bool", "term", "term_bool", "factor", "factor_bool", "ind_list", "more_ind_list", "remaining_var", "more_rowj", "more_rowjj", "array_op", "op_no_op_or", "op_no_op_and", "op_plus_minus", "op_mul_div"
 };
 
 
@@ -535,20 +535,18 @@ int checkPresence(int* bitVector,  int i){
 /*************************************************************************************************************************/
 
 void createParseTable(Grammar* grm, FirstAndFollow* sets, ParsingTable* table){
-	for(int i=0;i<TOTAL_NON_TERMINALS;i++){
+	for(int i=0;i<TOTAL_NON_TERMINALS;i++){ // for every non terminal 
 		Rules* rules = grm->rules[i];
 
 		Rule* temp = rules->head;
 
-		for(int j = 0;j< rules->length;j++){
-
+		for(int j = 0;j< rules->length;j++){ // for every rule of a non terminal 
 			Symbol_list* symbols = temp->symbols;
 			Symbol_node* temp2 = symbols->head;
 
 			int to_be_continued = 0;
 
-			for(int k=0;k<symbols->length;k++){
-
+			for(int k=0;k<symbols->length;k++){	// for every symbol in the rule of a non terminal 
 				to_be_continued = 0;
 
 				//Terminal
@@ -561,7 +559,8 @@ void createParseTable(Grammar* grm, FirstAndFollow* sets, ParsingTable* table){
 							if(checkPresence(sets->follow[i], x)){							
 
 								if(table->cells[i][x]!=NULL){
-									printf("ERROR: Multiple rules clashing in a table-cell <%s> -> %s\n",NonTerminalMap[i],TerminalMap[x]);
+									printf("\n Non Terminal : %s	Rule No. %d		Symbol No. %d ", NonTerminalMap[i], j, k);
+									printf("ERROR: In EP Multiple rules clashing in a table-cell <%s> -> %s\n",NonTerminalMap[i],TerminalMap[x]);
 								}
 
 								table->cells[i][x] = get_cell(temp,i);
@@ -574,7 +573,8 @@ void createParseTable(Grammar* grm, FirstAndFollow* sets, ParsingTable* table){
 					//any other terminal
 					else{
 						if(table->cells[i][temp2->type.terminal]!=NULL){
-							printf("ERROR: Multiple rules clashing in a table-cell <%s> -> %s\n",NonTerminalMap[i],TerminalMap[temp2->type.terminal]);
+							printf("\n Non Terminal : %s	Rule No. %d		Symbol No. %d ", NonTerminalMap[i], j, k);
+							printf("ERROR: In Term Multiple rules clashing in a table-cell <%s> -> %s\n",NonTerminalMap[i],TerminalMap[temp2->type.terminal]);
 						}
 						table->cells[i][temp2->type.terminal] = get_cell(temp,i);
 						break;
@@ -590,7 +590,8 @@ void createParseTable(Grammar* grm, FirstAndFollow* sets, ParsingTable* table){
 							if(x!=EPSILON){
 
 								if(table->cells[i][x]!=NULL){
-									printf("ERROR: Multiple rules clashing in a table-cell <%s> -> %s\n",NonTerminalMap[i],TerminalMap[x]);
+									printf("\n Non Terminal : %s	Rule No. %d		Symbol No. %d ", NonTerminalMap[i], j, k);
+									printf("ERROR: NT Multiple rules clashing in a table-cell <%s> -> %s\n",NonTerminalMap[i],TerminalMap[x]);
 								}
 								table->cells[i][x] = get_cell(temp,i);
 							}

@@ -34,7 +34,7 @@ typedef struct token Token;
 
 
 //Total number of nonterminals
-#define TOTAL_NON_TERMINALS 36
+#define TOTAL_NON_TERMINALS 39
 
 //Actual total terminals + $ will be the number of columns in the parse table -- so 40(actual terminals) + 1
 #define TOTAL_TERMINALS 41
@@ -50,7 +50,7 @@ typedef Tokentype Terminal;
 
 
 typedef enum{
-program, stmts, stmt, more_stmts, decl, assign, var_list, type, primitive, array, rectangular, jagged, arr_dims, arr_dim, range, low, high, rows_dec_R1, rows_dec_jR1, op_dim, rowjj, rowj, expression, expression_arith, expression_bool, term, term_bool, factor, factor_bool, ind_list, more_ind_list, remaining_var, more_rowj, more_rowjj, array_op
+program, stmts, stmt, more_stmts, decl, assign, var_list, type, primitive, array, rectangular, jagged, arr_dims, arr_dim, range, low, high, rows_dec_R1, rows_dec_jR1, op_dim, rowjj, rowj, expression, expression_arith, expression_bool, term, term_bool, factor, factor_bool, ind_list, more_ind_list, remaining_var, more_rowj, more_rowjj, array_op, op_no_op_or, op_no_op_and, op_plus_minus, op_mul_div
 }NonTerminal;
 
 
