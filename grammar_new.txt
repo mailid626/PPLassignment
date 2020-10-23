@@ -1,0 +1,58 @@
+<program> ===> PROGRAM OP CL COP <stmts> END
+<stmts> ===> <stmt> <more_stmts>
+<more_stmts> ===> <stmts>
+<more_stmts> ===> EPSILON
+<stmt> ===> <decl>
+<stmt> ===> <assign>
+<decl> ===> DECL <var_list> COLON <type> SEMICOLON
+<decl> ===> DEC ID COLON <type> SEMICOLON
+<var_list> ===> ID <remaining_var>
+<remaining_var> ===> <var_list>
+<remaining_var> ===> EPSILON
+<type> ===> <primitive>
+<type> ===> <array>
+<primitive> ===> INT
+<primitive> ===> REAL
+<primitive> ===> BOOLEAN
+<array> ===> <rectangular>
+<array> ===> <jagged>
+<rectangular> ===> ARRAY <arr_dims> OFINT
+<arr_dims> ===> <arr_dim> <arr_dims>
+<arr_dims> ===> EPSILON
+<arr_dim> ===> SQOP <range> DOTS <range> SQCL
+<range> ===> ID
+<range> ===> NUM
+<jagged> ===> JAGGEDARRAY SQOP <low> DOTS <high> SQCL SQOP <op_dim> SQCL OFINT SEMICOLON <rows_dec_R1>
+<op_dim> ===> SQOP SQCL
+<op_dim> ===> EPSILON
+<low> ===> NUM
+<high> ===> NUM
+<rows_dec_R1> ===> R SQOP NUM SQCL COLON SZ NUM COLON VALUES COP <rowjj> CCL <rows_dec_R1> 
+<rows_dec_R1> ===> EPSILON
+<rowjj> ===> <rowj> <more_rowjj> 
+<more_rowjj> ===> SEMICOLON <rowjj>
+<more_rowjj> ===> EPSILON
+<rowj> ===> NUM <more_rowj>
+<more_rowj> ===> <rowj>
+<more_rowj> ===> EPSILON
+<assign> ===> ID <array_op> EQUALS <expression> SEMICOLON
+<assign> ===> IDB <array_op> EQUALS <expression_bool> SEMICOLON
+<expression> ===> <expression_arith>
+<expression_arith> ===> <expression_arith> PLUS <term>
+<expression_arith> ===> <expression_arith> MINUS <term>
+<expression_arith> ===> <term>
+<term> ===> <term> MUL <factor>
+<term> ===> <term> DIV <factor>
+<term> ===> <factor>
+<factor> ===> ID <array_op>
+<factor> ===> NUM
+<array_op> ===> SQOP <ind_list> SQCL
+<array_op> ===> EPSILON
+<ind_list> ===> ID
+<ind_list> ===> NUM
+<ind_list> ===> <ind_list>ID
+<expression_bool> ===> <expression_bool> OR <term_bool>
+<expression_bool> ===> <term_bool>
+<term_bool> ===> <term_bool> AND <factor_bool>
+<term_bool> ===> <factor_bool>
+<factor_bool> ===> IDB
