@@ -104,25 +104,54 @@ int findfromTerminalMaptoTerminal(char* str){
 
 
 void findmapping(Token_s * st){
+    removeChar(st->lexeme, '\n');
+    printf("Lexeme is %s \n ", st->lexeme);
     for(int i = 0; i< TOTAL_NUM_TERMINALS; i++){
-        printf("\n Type[i] is : %s and lexeme is : %s \n", Type[i], st->lexeme);
+        // printf("\n Type[i] is : %s and lexeme is : %s \n", Type[i], st->lexeme);
         if(!strcmp(Type[i], st->lexeme)){ // Type and lexeme will be of the same kind 
         
             int j = findfromTerminalMaptoTerminal(TerminalMap[i]);
             st->type = (Terminal)j;
+            break;
             // printf("\n Terminal %d %d \n", j, st->type);
         }
-        
-    }
-    if(st->token_name == "IDENTIFIERS" ){
-        printf("%s \n ", st->token_name);
-        if(isInt(st->lexeme)){
+        else{
+            if(isInt(st->lexeme)){
             st->type = NUM;
         }
-        else{
+            else{
             st->type = ID;
         }
+        }
     }
+    // if(st->token_name == "IDENTIFIERS" ){
+    //     printf("%s \n ", st->token_name);
+    //     if(isInt(st->lexeme)){
+    //         st->type = NUM;
+    //     }
+    //     else{
+    //         st->type = ID;
+    //     }
+    // }
+}
+
+// char * findnewline(char *s){
+//     for(int i=0;s[i]!='\0';i++)
+// 	{
+// 		if ((s[i]) == '\n') // check 
+//             		return 0;
+// 	}
+// 	return 1;
+// }
+
+void removeChar(char *str, char garbage) {
+
+    char *src, *dst;
+    for (src = dst = str; *src != '\0'; src++) {
+        *dst = *src;
+        if (*dst != garbage) dst++;
+    }
+    *dst = '\0';
 }
 
 void push(char *  str, tokenstream * s)

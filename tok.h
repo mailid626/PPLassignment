@@ -14,7 +14,7 @@ char* TerminalMap[] = {
 
 
 char* Type[] = {
-	"program", "size", "(", ")\n", "{", "}", "[", "]", "...", "EPSILON", ":", ";", "ID", "IDB", "NUM", "integer", "boolean", "real", "array", "jagged", "declare", "list", "of", "variables", "R1", "values", "=", "+", "-", "*", "/", "&&&", "|||","$"
+	"program", "size", "(", ")", "{", "}", "[", "]", "...", "EPSILON", ":", ";", "ID", "IDB", "NUM", "integer", "boolean", "real", "array", "jagged", "declare", "list", "of", "variables", "R1", "values", "=", "+", "-", "*", "/", "&&&", "|||","$"
 };
 struct token_s 
 {
@@ -39,5 +39,6 @@ int isInt(char*s);
 int set_token(Token_s * token);
 void findmapping(Token_s * st);
 char * findnewline(char *s);
+void removeChar(char *str, char garbage);
 
 
