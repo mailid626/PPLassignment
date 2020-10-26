@@ -112,14 +112,7 @@ void findmapping(Token_s * st){
             st->type = (Terminal)j;
             // printf("\n Terminal %d %d \n", j, st->type);
         }
-        else{
-            if(isInt(st->lexeme)){
-            st->type = NUM;
-        }
-        else{
-            st->type = ID;
-        }
-        }
+        
     }
     if(st->token_name == "IDENTIFIERS" ){
         printf("%s \n ", st->token_name);
